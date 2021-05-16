@@ -118,7 +118,7 @@ with open('../src/graph.csv', 'r') as csv_file:
             pass;
 
         pygame.display.flip()
-        time.sleep(0.1)
+        time.sleep(0.01)
 
 #--------------------path display--------------------------------
 # with open('../src/path.csv', 'r') as csv_file:

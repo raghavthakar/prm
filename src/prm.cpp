@@ -7,7 +7,7 @@
 #include <unistd.h>
 
 #define MAP_LENGTH 1000
-#define CLUSTER_RADIUS 100
+#define CLUSTER_RADIUS 75
 #define CLUSTER_NUMBER 5
 
 using namespace std;
@@ -18,6 +18,9 @@ class Node
   int col;
   int row;
 
+  //Store the distance of the noee from start
+  int distance;
+
   //This list stores pointer to all connected nodes
   list<Node*> connections;
 
@@ -27,6 +30,7 @@ class Node
   {
     this->col=col;
     this->row=row;
+    this->distance=10000;
   }
 
   //Returns the column number
@@ -40,6 +44,12 @@ class Node
   {
     return row;
   }
+
+  //Return the distance
+  // double getDistance()
+  // {
+  //   return (distance);
+  // }
 
   void writeToCSV()
   {
@@ -190,24 +200,54 @@ class Graph
   }
 };
 
+Graph dijkstra(Graph main_graph)
+{
+  //start from start, set the distance of all connections
+  //pick the connection with lowest distance, and push it to another list
+  //set distance of all connections if lower than already present distance
+  //pick cinnection wid lwoest dist, push it to another list
+}
+
 int main()
 {
-  usleep(1000);
   Graph main_graph;
 
-  Node* x_root;
   Node* x_rand;
 
+  int start_col, start_row, goal_col, goal_row;
+
+  //Info on starting point
+  cout<<"Enter starting column: ";
+  cin>>start_col;
+  cout<<"Enter starting row: ";
+  cin>>start_row;
+  Node* x_start=new Node(start_col, start_row);
+
+  //Info on goal point
+  cout<<"Enter goal column: ";
+  cin>>goal_col;
+  cout<<"Enter goal row: ";
+  cin>>goal_row;
+  Node* x_goal=new Node(goal_col, goal_row);
+
+  //Add starting node to graph
+  main_graph.createCluster(x_start);
+  main_graph.addNode(x_start);
+
+  //Add goal node to graph
+  main_graph.createCluster(x_goal);
+  main_graph.addNode(x_goal);
+
+  //Clear the csv where graph willbe written
   main_graph.clearCSV();
 
   //main loop
   for(int i=0; i<500; i++)
   {
-    cout<<i;
     //randomly smaple a point on the workspace
     x_rand = main_graph.generateRandomConfig();
-    cout<<"The randomly sampled point is: \n";
-    x_rand->display();
+    // cout<<"The randomly sampled point is: \n";
+    // x_rand->display();
 
     //reiterate if the random node is illegal
     if(!main_graph.isLegal(x_rand))
@@ -232,6 +272,7 @@ int main()
     (*it).writeToCSV();
   }
 
-  
+  // main_graph=dijkstra(main_graph);
+
   return 0;
 }
