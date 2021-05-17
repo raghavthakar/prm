@@ -9,7 +9,6 @@
 #define MAP_LENGTH 1000
 #define CLUSTER_RADIUS 75
 #define CLUSTER_NUMBER 5
-
 using namespace std;
 
 class Node
@@ -19,7 +18,7 @@ class Node
   int row;
 
   //Store the distance of the noee from start
-  int distance;
+  double distance;
 
   //This list stores pointer to all connected nodes
   list<Node*> connections;
@@ -30,7 +29,6 @@ class Node
   {
     this->col=col;
     this->row=row;
-    this->distance=10000;
   }
 
   //Returns the column number
