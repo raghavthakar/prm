@@ -4,7 +4,7 @@
 #include "graph.h"
 #include "node.h"
 
-#define NUM_NODES 3
+#define NUM_NODES 500
 
 using namespace std;
 
